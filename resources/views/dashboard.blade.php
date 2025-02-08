@@ -2,5 +2,5 @@
 @section('title', 'Home')
 
 @section('content')
-<p>Aku raja validasi</p>
+<p>Selamat datang {{session()->get('username')}}!</p>
 @endsection

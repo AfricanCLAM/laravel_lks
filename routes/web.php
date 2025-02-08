@@ -9,7 +9,7 @@ Route::get('/', function () {
 })->name('home');
 
 // Register route
-Route::get('/register', [AuthController::class, 'register']);
+Route::get('/register', [AuthController::class, 'register_view']);
 Route::post('/register', [AuthController::class, 'store']);
 
 // Login Route

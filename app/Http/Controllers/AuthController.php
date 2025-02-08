@@ -14,7 +14,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function register()
+    public function register_view()
     {
         return view('auth.register');
     }
@@ -34,7 +34,8 @@ class AuthController extends Controller
         ]);
 
         // Redirect to a page with a success message
-        return redirect('/')->with('success', 'successfully registered!');
+        session()->flash('success', 'succesfully Signed Up!');
+        return redirect('/');
     }
 
     public function login(Request $request)
@@ -44,7 +45,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        // Attempt to find the user by email
+        // Find user by email
         $user = User::where('email', $request->email)->first();
 
         // print("user password :". $user->password);
@@ -53,11 +54,18 @@ class AuthController extends Controller
 
         // Check if user exists and password is correct
         if ($user && Hash::check($request->password, $user->password)) {
-            $request->session()->put('isLoggedIn', 'true');
+            // if true,add 'HasLoggedIn' session and redirect to '/dashboard'
+            $request->session()->put('isLoggedIn', true);
+            session([
+                'username' => $user->name, 
+                'email' => $user->email
+            ]);
+            session()->flash('success', 'Succesfully Signed In!');
             return redirect('/dashboard');
         }
 
-        return redirect('/');
+        // email or password incorrect
+        return session()->flash('error', 'Email or password is incorrect!');
     }
 
     public function logout(Request $request)
@@ -65,6 +73,7 @@ class AuthController extends Controller
         $request->session()->invalidate(); // Clears session
         $request->session()->regenerateToken(); // Prevent CSRF issues
 
-        return redirect('/')->with('success', 'Logged out successfully!');
+        session()->flash('success', 'Logged out successfully!');
+        return redirect('/');
     }
 }

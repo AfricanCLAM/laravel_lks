@@ -3,6 +3,7 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    RewriteRule ^login$ /index.php?url=login [L,QSA]
     RewriteEngine On
 
     # Handle Authorization Header
