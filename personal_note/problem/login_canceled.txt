@@ -1,0 +1,19 @@
+problem:can't redirect to '/login' with 'a href',but somehow can do it when adding '/login' to address bar '127.0.0.1:8000'
+status:RESOLVED
+
+troubleshooting attempt:
+-restart server
+-add 'RewriteRule ^login$ /index.php?url=login [L,QSA]' on top of 'RewriteEngine On' in htaccess
+-change 'AllowOverride None' to 'AllowOverride All' on apache 'httpd.conf'
+-run throughout cache cleaning:
+php artisan cache:clear
+php artisan route:clear
+php artisan config:clear
+php artisan view:clear
+
+
+resolved with:
+removing the login dom from 'login.blade.php' and then re-add it again
+
+author note:
+iki nge cache ta piye se

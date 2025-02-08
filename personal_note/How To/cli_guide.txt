@@ -1,0 +1,18 @@
+1.migration
+
+~migrate db
+php artisan migrate:option --flag
+
+omit ':' if there's no option
+omit '--' if there's no flag
+
+>option
+~migrate rollback
+rollback
+
+~reset migration (roll back all table)
+reset
+
+>flag
+~with model
+-m

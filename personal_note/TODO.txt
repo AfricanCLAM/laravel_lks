@@ -1,0 +1,8 @@
+-modul kelas
+-modul jurusan
+-profile edit
+-add role to user
+guru - dashboard access
+siswa - daftar jurusan dan detail jurusan
+
+n.b:modul = create read update delete

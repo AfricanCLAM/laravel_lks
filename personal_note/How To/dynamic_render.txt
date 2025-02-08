@@ -1,0 +1,8 @@
+1. url based (best for nav)
+  @if (!request()->is('/'))
+    <a href="/" class="text-gray-300 hover:text-white transition-colors duration-300 px-4 py-2 rounded-md text-lg">Home</a>
+@endif
+
+2. Session based 
+  @if (session()->exists('session key'))
+  @endif

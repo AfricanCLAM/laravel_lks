@@ -1,0 +1,5 @@
+return redirect('/login')->withInput($request->only('email'));
+
+or if all input is needed
+
+return redirect('/login')->withInput();

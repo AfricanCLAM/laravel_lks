@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Home')
+@section('title', 'Main Dashboard')
 
 @section('content')
 <p>Selamat datang {{session()->get('username')}}!</p>

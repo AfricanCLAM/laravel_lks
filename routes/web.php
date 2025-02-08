@@ -13,7 +13,7 @@ Route::get('/register', [AuthController::class, 'register_view']);
 Route::post('/register', [AuthController::class, 'store']);
 
 // Login Route
-Route::get('/login', [AuthController::class, 'login_view']);
+Route::get('/login', [AuthController::class, 'login_view'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 // Logout Route

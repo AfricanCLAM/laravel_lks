@@ -48,10 +48,6 @@ class AuthController extends Controller
         // Find user by email
         $user = User::where('email', $request->email)->first();
 
-        // print("user password :". $user->password);
-        // print(" inputted password :". bcrypt($request->password));
-        // dd();
-
         // Check if user exists and password is correct
         if ($user && Hash::check($request->password, $user->password)) {
             // if true,add 'HasLoggedIn' session and redirect to '/dashboard'
@@ -65,7 +61,8 @@ class AuthController extends Controller
         }
 
         // email or password incorrect
-        return session()->flash('error', 'Email or password is incorrect!');
+        session()->flash('error', 'Email or password is incorrect!');
+        return redirect('/login')->withInput($request->only('email'));
     }
 
     public function logout(Request $request)
