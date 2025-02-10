@@ -1,5 +1,5 @@
--modul kelas
--modul jurusan
+-modul kelas (done)
+-modul jurusan (done)
 -profile edit
 -add role to user
 guru - dashboard access

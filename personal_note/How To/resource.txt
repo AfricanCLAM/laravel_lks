@@ -1,0 +1,34 @@
+Resources controller -> a controller that automatically create "CRUD" routes
+
+command:
+php artisan make:controller [controller_name] --Resources
+
+[controller_name] = name of your controller
+
+Action handled by Resource Controllers
+Method      URI                 Action      Route name
+GET         /[name]             index       [name].index
+GET         /[name]/create      create      [name].create
+POST        /[name]             store       [name].store
+GET         /[name]/[id]        show        [name].show
+GET         /[name]/[id]/edit   edit        [name].edit
+PUT/PATCH   /[name]/[id]        update      [name].update
+DELETE      /[name]/[id]        Destroy     [name].destroy   
+
+[name] = name of your route
+
+Applying Resource Route:
+Route::resource('[name]', [controller_name]::class);
+
+>flag for route
+1.Partial
+'only' action means that only the listed action will be used.if 'only'
+flag is index,create and store. then show,edit,update destroy will not be used
+
+->only(['action']);
+
+'except' action means that every action are used except the listed action. if 'except'
+flag is 'show' then index,create,store,edit,update,destroy will be used and show will
+not be used
+
+->except(['action']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -21,11 +22,29 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => "required|string|max:255",
-            'email' => "required|string|max:255",
-            'password' => 'required'
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8',
+        ], [
+            'name.required' => 'The name field is required.',
+            'name.max' => 'The name must not exceed 255 characters',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'The email must be a valid email address.',
+            'email.unique' => 'The email has already been taken.',
+            'email.max' => 'The name must not exceed 255 characters',
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 8 characters.',
         ]);
+
+        // If validation fails, redirect back with errors and old input
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator) // Pass validation errors
+                ->withInput(); // Retain old input
+        }
 
         User::create([
             'name' => $request->name,
@@ -53,7 +72,7 @@ class AuthController extends Controller
             // if true,add 'HasLoggedIn' session and redirect to '/dashboard'
             $request->session()->put('isLoggedIn', true);
             session([
-                'username' => $user->name, 
+                'username' => $user->name,
                 'email' => $user->email
             ]);
             session()->flash('success', 'Succesfully Signed In!');

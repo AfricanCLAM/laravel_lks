@@ -20,6 +20,8 @@
 </head>
 
 <body class="bg-gray-900 text-white">
+
+    <!-- Notification -->
     @if(Session::has('success') || session::has('error'))
     <!-- Modal backdrop -->
     <div id="modalBackdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
@@ -104,7 +106,8 @@
             </div>
             <nav class="mt-6">
                 <a href="/dashboard" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300">Home</a>
-                <a href="/settings" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300">Settings</a>
+                <a href="/kelas" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300">Kelas</a>
+                <a href="/jurusan" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300">Jurusan</a>
             </nav>
         </div>
         @endif
